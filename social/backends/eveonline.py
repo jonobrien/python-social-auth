@@ -4,12 +4,13 @@ Documentation at https://developers.eveonline.com/resource/single-sign-on
 """
 from social.backends.oauth import BaseOAuth2
 
+BASE_URL = 'https://login.eveonline.com/oauth'
 
 class EVEOnlineOAuth2(BaseOAuth2):
     """EVE Online OAuth authentication backend"""
     name = 'eveonline'
-    AUTHORIZATION_URL = 'https://login.eveonline.com/oauth/authorize'
-    ACCESS_TOKEN_URL = 'https://login.eveonline.com/oauth/token'
+    AUTHORIZATION_URL = BASE_URL + '/authorize'
+    ACCESS_TOKEN_URL = BASE_URL + '/token'
     ID_KEY = 'CharacterID'
     ACCESS_TOKEN_METHOD = 'POST'
     EXTRA_DATA = [
@@ -36,6 +37,6 @@ class EVEOnlineOAuth2(BaseOAuth2):
     def user_data(self, access_token, *args, **kwargs):
         """Get Character data from EVE server"""
         return self.get_json(
-            'https://login.eveonline.com/oauth/verify',
+            BASE_URL + '/verify',
             headers={'Authorization': 'Bearer {0}'.format(access_token)}
         )
