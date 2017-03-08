@@ -4,11 +4,11 @@ Documentation at https://developers.eveonline.com/resource/single-sign-on
 """
 from social.backends.oauth import BaseOAuth2
 
-BASE_URL = 'https://login.eveonline.com/oauth'
 
 class EVEOnlineOAuth2(BaseOAuth2):
     """EVE Online OAuth authentication backend"""
     name = 'eveonline'
+    BASE_URL = 'https://login.eveonline.com/oauth'
     AUTHORIZATION_URL = BASE_URL + '/authorize'
     ACCESS_TOKEN_URL = BASE_URL + '/token'
     ID_KEY = 'CharacterID'
